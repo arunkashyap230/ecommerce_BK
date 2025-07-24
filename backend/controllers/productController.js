@@ -4,7 +4,7 @@ const createProduct = async (req, res) => {
   try {
     const { name, price, description } = req.body;
     const imageUrl = req.file
-      ? `http://localhost:5000/uploads/${req.file.filename}`
+      ? `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`
       : null;
 
     const product = new Product({
