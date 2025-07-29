@@ -4,10 +4,11 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
-const productRoutes = require("./routes/productRoutes");
+const productRoutes = require("./routes/products");
 const customerRoutes = require("./routes/customerRoutes");
 const billRoutes = require("./routes/billRoutes");
 const path = require("path");
+require("dotenv").config();
 
 dotenv.config();
 const app = express();
@@ -15,11 +16,11 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/api/products", productRoutes);
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/products", productRoutes);
+
 app.use("/api/customers", customerRoutes);
 app.use("/api", billRoutes);
 
